@@ -1,0 +1,139 @@
+﻿@using System.Web.Mvc.Html
+@*In oreder for  the view to know what object to use, set the
+    @model keyword to point to the our Application view model*@
+
+@model NAA.Models.ApplicationViewModel
+
+@{
+//ViewBag.Title = "Application";
+// Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <h4>Application</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.ApplicationId)
+        @Html.HiddenFor(x => x.UniversityId)
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.ApplicantId, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6 alert alert-transprent">
+                @Html.DisplayTextFor(x => x.ApplicantName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*The universities and courses object is a property of the viewModel, you will see the model.Class.Property syntax
+                to access the ViewModel below. Model.Universities*@
+            @Html.LabelFor(x => x.UniversityName, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6 alert alert-transprent">
+                @Html.DisplayTextFor(x => Model.UniversityName)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.CourseName, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6 alert alert-transprent" >
+                @Html.DisplayTextFor(x => x.CourseName)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Course Description</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                @Html.DisplayTextFor(x => x.CourseDescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Entry Criteria</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                @Html.DisplayTextFor(x => x.EntryCriteria)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Course Content</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                @Html.DisplayTextFor(x => x.CourseContent)
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.PersonalStatement, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6  alert alert-transprent">
+                @Html.DisplayTextFor(x => x.PersonalStatement)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.TeacherReference, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6  alert alert-transprent">
+                @Html.DisplayTextFor(x => x.TeacherReference)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.TeacherContactDetails, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-6  alert alert-transprent">
+                @Html.DisplayTextFor(x => x.TeacherContactDetails)
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.UniversityOffer) && Model.UniversityOffer.Trim().ToUpper() == "C")
+        {
+            <div class="form-group">
+
+                @Html.LabelFor(x => x.OfferCondition, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-6 alert alert-transprent">
+                    <span>
+                        @Model.OfferCondition
+                    </span>
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.UniversityOffer) && Model.UniversityOffer.Trim().ToUpper() == "R")
+        {
+            <div class="form-group">
+
+                @Html.LabelFor(x => x.RejectReason, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-6 alert alert-transprent">
+                    <span>
+                        @Model.RejectReason
+                    </span>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Action("Index", "Application", new {applicantId = Model.ApplicantId})"> Back to list</a>
+            </div>
+        </div>
+
+    </div>
+
+}

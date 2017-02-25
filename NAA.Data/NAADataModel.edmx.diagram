@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ca8235bb0d94d2c9a0af2658770eb2c" Name="Diagram1">
+        <EntityTypeShape EntityType="NAAModel.Applicant" PointX="4.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAAModel.Application" PointX="0.75" PointY="0.75" Width="1.5" />
+        <AssociationConnector Association="NAAModel.FK_Application_Applicant1" />
+        <EntityTypeShape EntityType="NAAModel.University" Width="1.5" PointX="4.75" PointY="3.375" />
+        <AssociationConnector Association="NAAModel.FK_Application_University" />
+        <EntityTypeShape EntityType="NAAModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NAAModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="NAAModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="NAAModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6" />
+        <EntityTypeShape EntityType="NAAModel.AspNetUsers" Width="1.5" PointX="3" PointY="6.375" />
+        <AssociationConnector Association="NAAModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="NAAModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="NAAModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

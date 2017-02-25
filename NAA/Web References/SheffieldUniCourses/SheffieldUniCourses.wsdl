@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetCoursesFullDetails">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCoursesFullDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoursesFullDetailsResult" type="tns:ArrayOfCourse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCourse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Course" nillable="true" type="tns:Course" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Course">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryReq" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarif" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="University" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NSS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Qulaification" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCoursesShortDetails">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCoursesShortDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoursesShortDetailsResult" type="tns:ArrayOfCourseId_Name" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCourseId_Name">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CourseId_Name" nillable="true" type="tns:CourseId_Name" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CourseId_Name">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfCourse" nillable="true" type="tns:ArrayOfCourse" />
+      <s:element name="ArrayOfCourseId_Name" nillable="true" type="tns:ArrayOfCourseId_Name" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCoursesFullDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoursesFullDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesFullDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoursesFullDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesShortDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoursesShortDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesShortDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoursesShortDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesFullDetailsHttpGetIn" />
+  <wsdl:message name="GetCoursesFullDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesShortDetailsHttpGetIn" />
+  <wsdl:message name="GetCoursesShortDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseId_Name" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesFullDetailsHttpPostIn" />
+  <wsdl:message name="GetCoursesFullDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoursesShortDetailsHttpPostIn" />
+  <wsdl:message name="GetCoursesShortDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseId_Name" />
+  </wsdl:message>
+  <wsdl:portType name="SheffieldUniCoursesSoap">
+    <wsdl:operation name="GetCoursesFullDetails">
+      <wsdl:input message="tns:GetCoursesFullDetailsSoapIn" />
+      <wsdl:output message="tns:GetCoursesFullDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <wsdl:input message="tns:GetCoursesShortDetailsSoapIn" />
+      <wsdl:output message="tns:GetCoursesShortDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SheffieldUniCoursesHttpGet">
+    <wsdl:operation name="GetCoursesFullDetails">
+      <wsdl:input message="tns:GetCoursesFullDetailsHttpGetIn" />
+      <wsdl:output message="tns:GetCoursesFullDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <wsdl:input message="tns:GetCoursesShortDetailsHttpGetIn" />
+      <wsdl:output message="tns:GetCoursesShortDetailsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SheffieldUniCoursesHttpPost">
+    <wsdl:operation name="GetCoursesFullDetails">
+      <wsdl:input message="tns:GetCoursesFullDetailsHttpPostIn" />
+      <wsdl:output message="tns:GetCoursesFullDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <wsdl:input message="tns:GetCoursesShortDetailsHttpPostIn" />
+      <wsdl:output message="tns:GetCoursesShortDetailsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SheffieldUniCoursesSoap" type="tns:SheffieldUniCoursesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCoursesFullDetails">
+      <soap:operation soapAction="http://tempuri.org/GetCoursesFullDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <soap:operation soapAction="http://tempuri.org/GetCoursesShortDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldUniCoursesSoap12" type="tns:SheffieldUniCoursesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCoursesFullDetails">
+      <soap12:operation soapAction="http://tempuri.org/GetCoursesFullDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <soap12:operation soapAction="http://tempuri.org/GetCoursesShortDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldUniCoursesHttpGet" type="tns:SheffieldUniCoursesHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetCoursesFullDetails">
+      <http:operation location="/GetCoursesFullDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <http:operation location="/GetCoursesShortDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldUniCoursesHttpPost" type="tns:SheffieldUniCoursesHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetCoursesFullDetails">
+      <http:operation location="/GetCoursesFullDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoursesShortDetails">
+      <http:operation location="/GetCoursesShortDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SheffieldUniCourses">
+    <wsdl:port name="SheffieldUniCoursesSoap" binding="tns:SheffieldUniCoursesSoap">
+      <soap:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SheffieldUniCourses.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldUniCoursesSoap12" binding="tns:SheffieldUniCoursesSoap12">
+      <soap12:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SheffieldUniCourses.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldUniCoursesHttpGet" binding="tns:SheffieldUniCoursesHttpGet">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SheffieldUniCourses.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldUniCoursesHttpPost" binding="tns:SheffieldUniCoursesHttpPost">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SheffieldUniCourses.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

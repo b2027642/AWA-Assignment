@@ -1,0 +1,24 @@
+﻿@model IList<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
+@{
+    ViewBag.Title = "GetUsers";
+}
+
+<h2>List of Users</h2>
+
+<table class="table table-responsive table-striped table-hover table-condensed">
+    <tr>
+        <th>
+            User Name
+        </th>
+        <th>Action</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>
+                @Html.ActionLink("Manage Role", "ManageUserRoles", new { userName = user.UserName }) 
+            </td>
+        </tr>
+    }
+</table>

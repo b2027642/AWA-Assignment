@@ -1,0 +1,41 @@
+﻿@model IList<NAA.SHUWebService.CourseList>
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>List of courses for @ViewBag.UniversityName</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Content
+        </th>
+        <th style="width: 200px;">
+            Entry Criteria
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @item.CourseName
+            </th>
+            <th>
+                @item.CourseDescription
+            </th>
+            <th>
+                @item.CourseContent
+            </th>
+            <th>
+                @item.EntryCriteria
+            </th>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Back to list", "Index")

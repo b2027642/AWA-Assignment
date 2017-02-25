@@ -1,0 +1,61 @@
+﻿@model IList<NAA.Data.Applicant>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home.</h2>
+
+<p>
+    A short description about National Admission Agency.
+</p>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Applicant Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            UserID
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicantName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicantAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicantId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ApplicantId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicantId })
+        </td>
+    </tr>
+}
+
+</table>*@

@@ -1,0 +1,209 @@
+﻿@using System.Web.Mvc.Html
+@*In oreder for  the view to know what object to use, set the
+@model keyword to point to the our Application view model*@
+
+@model NAA.Models.ApplicationViewModel
+
+@{
+//ViewBag.Title = "Application";
+// Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <h4>Application</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.ApplicationId)
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.ApplicantId, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-3 alert alert-transprent">
+                @Html.DisplayTextFor(x => x.ApplicantName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*The universities and courses object is a property of the viewModel, you will see the model.Class.Property syntaxt
+            to access the ViewModel below. Model.Universities*@
+            @Html.LabelFor(x => x.UniversityId, new { @class = "control-label col-md-2" })
+           
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.UniversityId, Model.Universities, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.CourseName, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.CourseName, Model.Courses, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Course Description</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                <span id="courseDescription"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Entry Criteria</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                <span id="entryCriteria"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2">Course Content</label>
+
+            <div class="col-md-6 alert alert-transprent">
+                <span id="courseContent"></span>
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.PersonalStatement, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.TextAreaFor(x => x.PersonalStatement, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.TeacherReference, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.TextAreaFor(x => x.TeacherReference, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.TeacherContactDetails, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.TeacherContactDetails, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.UniversityOffer) && Model.UniversityOffer.Trim().ToUpper() == "C")
+        {
+            <div class="form-group">
+
+                @Html.LabelFor(x => x.OfferCondition, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-6 alert alert-transprent">
+                    <span>
+                        @Model.OfferCondition
+                    </span>
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.UniversityOffer) && Model.UniversityOffer.Trim().ToUpper() == "R")
+        {
+            <div class="form-group">
+
+                @Html.LabelFor(x => x.RejectReason, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-6 alert alert-transprent">
+                    <span>
+                        @Model.RejectReason
+                    </span>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @if (string.IsNullOrEmpty(Model.UniversityOffer))
+                {
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                }
+                <input type="button" value="Cancel" onclick="window.location.href = '@Url.Action("Index", "Application", new {applicantId = Model.ApplicantId})'" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+
+    var _courses = [];
+    $(document).ready(function () {
+        //Dropdownlist Selected Change event
+        $("#UniversityId").change(function () {
+            $("#CourseName").empty();
+            getCourses();
+            return false;
+        });
+
+        $("#CourseName").change(function () {
+            displayCourseDetail();
+            return false;
+        });
+
+        getCourses();
+    });
+
+    function getCourses() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetCourses")',//Calling the json method
+            dataType: 'json',
+            data: { universityId: $("#UniversityId").val() },// Get the value of selected Univeristy and passing
+                                                             //the same value as input into json method GetCourses.
+            success: function (courses) {
+                //GetCourses contains the json formatted list
+                //courses passed from the controller.
+                //References Below
+                //www.c-sharpcorner.com/UploadFile/4d9083/creating-simple-cascading-dropdownlist-in-mvc-4-using-razor/
+                //www.lynda.com/ASP-NET-tutorials/Avoid-page-refreshes-partial-rendering/512728/561897-4.html
+
+                _courses = courses;
+                $("#CourseName").empty();
+                for (var i = 0; i < courses.length; i++) {
+                    $("#CourseName").append('<option value="' + courses[i].CourseName + '">' +
+                        courses[i].CourseName + '</option>');
+                }
+
+                displayCourseDetail();
+            },
+            error: function (ex) {
+                alert('Failed to retrieve courses.' + ex);
+            }
+        });
+    }
+
+    function displayCourseDetail() {
+        var courseName = $("#CourseName").val();
+
+        $("#courseDescription").html("");
+        $("#entryCriteria ").html("");
+        $("#courseContent ").html("");
+
+        for (var i = 0; i < _courses.length; i++) {
+
+            if (_courses[i].CourseName == courseName) {
+                $("#courseDescription").html(_courses[i].CourseDescription);
+                $("#entryCriteria").html(_courses[i].EntryCriteria);
+                $("#courseContent").html(_courses[i].CourseContent);
+                break;;
+            }
+        }
+    }
+</script>

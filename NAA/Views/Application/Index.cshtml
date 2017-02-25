@@ -1,0 +1,111 @@
+﻿@using NAA.Helpers
+@model NAA.Models.ApplicationListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Applications</h2>
+<hr />
+@*Hide the Add applications button once the applications are 5 or more for applicants*@
+@if (Model.Applications.Count < 5 && !Model.Applications.Any(x => x.Firm == true))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn pull-right" href="@Url.Action("Edit", "Application", new {applicantId = Model.ApplicantId})" title="Add Application">Add</a>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-responsive table-striped table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 120px;">Application Id</th>
+                    <th class="text-center">Applicant</th>
+                    <th class="text-center" style="width: 15%;">Course</th>
+                    <th class="text-center" style="width: 25%;">University</th>
+                    <th class="text-center" style="width: 10%;">Offer</th>
+                    <th class="text-center" style="width: 70px;">Firm</th>
+                    <th class="text-center" style="width: 125px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (NAA.Data.Application app in Model.Applications)
+            {
+                    <tr>
+                        <td class="text-right">
+                            <a href="@Url.Action("DisplayApplication","Application",new {app.ApplicantId,app.ApplicationId})">@app.ApplicationId</a>
+                        </td>
+                        <td>
+                            @app.Applicant.ApplicantName
+                        </td>
+                        <td>
+                            @app.CourseName
+                        </td>
+                        <td>
+                            @app.University.UniversityName
+                        </td>
+
+                        <td>
+                            @Utility.GetOfferText(app.UniversityOffer)
+                        </td>
+
+                        <td>
+                            @app.Firm
+                        </td>
+
+                        <td>
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("Edit", "Application", new {applicantId = app.ApplicantId, applicationId = app.ApplicationId})">Edit</a>
+                            </div>
+                                @if (!Model.Applications.Any(x => x.Firm == true))
+                                {
+                                    @*Hide the delete button if the application has a offer other than that R or no offer*@
+                                if ((app.Firm == null || !app.Firm.Value) && (string.IsNullOrEmpty(app.UniversityOffer) || app.UniversityOffer.Trim().ToUpper() == "R"))
+                                {
+                                    <div class="col-lg-4">
+                                        @using (Html.BeginForm("Delete", "Application"))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("ApplicationId", app.ApplicationId)
+                                            @Html.Hidden("ApplicantId", app.ApplicantId)
+                                            <input type="submit" value="Delete" onclick="return onDelete();"
+                                                   class="btn btn-link btn-action" />
+                                        }
+                                    </div>
+                                }
+
+                                if (!Model.Applications.Any(x => x.Firm == true) && !string.IsNullOrEmpty(app.UniversityOffer) && app.UniversityOffer.Trim().ToUpper() != "R")
+                                {
+                                    <div class="col-lg-4">
+                                        @using (Html.BeginForm("SetFirm", "Application"))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("ApplicationId", app.ApplicationId)
+                                            @Html.Hidden("ApplicantId", app.ApplicantId)
+                                            <input type="submit" value="Firm" onclick="return onFirm();"
+                                                   class="btn btn-link btn-action" />
+                                        }
+                                    </div>
+                                    }
+                                }
+</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    function onFirm() {
+        return confirm("Do you want to accespt this offer? Once accepted you will not be able to accept other offers.");
+    }
+
+    function onDelete() {
+        return confirm("Do you want to delete this application?");
+    }
+</script>

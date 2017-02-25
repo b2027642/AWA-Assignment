@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAllCoursesAuthenticated">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllCoursesAuthenticatedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllCoursesAuthenticatedResult" type="tns:ArrayOfCourseList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCourseList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CourseList" nillable="true" type="tns:CourseList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CourseList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CourseId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CourseName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryCriteria" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CourseDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CourseContent" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticationHeader" type="tns:AuthenticationHeader" />
+      <s:complexType name="AuthenticationHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetAllCourses">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllCoursesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllCoursesResult" type="tns:ArrayOfCourseList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllNames">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllNamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllNamesResult" type="tns:ArrayOfCourseName" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCourseName">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CourseName" nillable="true" type="tns:CourseName" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CourseName">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CourseId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="courseName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfCourseList" nillable="true" type="tns:ArrayOfCourseList" />
+      <s:element name="ArrayOfCourseName" nillable="true" type="tns:ArrayOfCourseName" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllCoursesAuthenticatedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCoursesAuthenticated" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesAuthenticatedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCoursesAuthenticatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesAuthenticatedAuthenticationHeader">
+    <wsdl:part name="AuthenticationHeader" element="tns:AuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCourses" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCoursesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllNames" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesAuthenticatedHttpGetIn" />
+  <wsdl:message name="GetAllCoursesAuthenticatedHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesHttpGetIn" />
+  <wsdl:message name="GetAllCoursesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNamesHttpGetIn" />
+  <wsdl:message name="GetAllNamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseName" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesAuthenticatedHttpPostIn" />
+  <wsdl:message name="GetAllCoursesAuthenticatedHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCoursesHttpPostIn" />
+  <wsdl:message name="GetAllCoursesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNamesHttpPostIn" />
+  <wsdl:message name="GetAllNamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourseName" />
+  </wsdl:message>
+  <wsdl:portType name="SHUWebServiceSoap">
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <wsdl:input message="tns:GetAllCoursesAuthenticatedSoapIn" />
+      <wsdl:output message="tns:GetAllCoursesAuthenticatedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <wsdl:input message="tns:GetAllCoursesSoapIn" />
+      <wsdl:output message="tns:GetAllCoursesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <wsdl:input message="tns:GetAllNamesSoapIn" />
+      <wsdl:output message="tns:GetAllNamesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SHUWebServiceHttpGet">
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <wsdl:input message="tns:GetAllCoursesAuthenticatedHttpGetIn" />
+      <wsdl:output message="tns:GetAllCoursesAuthenticatedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <wsdl:input message="tns:GetAllCoursesHttpGetIn" />
+      <wsdl:output message="tns:GetAllCoursesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <wsdl:input message="tns:GetAllNamesHttpGetIn" />
+      <wsdl:output message="tns:GetAllNamesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SHUWebServiceHttpPost">
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <wsdl:input message="tns:GetAllCoursesAuthenticatedHttpPostIn" />
+      <wsdl:output message="tns:GetAllCoursesAuthenticatedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <wsdl:input message="tns:GetAllCoursesHttpPostIn" />
+      <wsdl:output message="tns:GetAllCoursesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <wsdl:input message="tns:GetAllNamesHttpPostIn" />
+      <wsdl:output message="tns:GetAllNamesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SHUWebServiceSoap" type="tns:SHUWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <soap:operation soapAction="http://tempuri.org/GetAllCoursesAuthenticated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllCoursesAuthenticatedAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <soap:operation soapAction="http://tempuri.org/GetAllCourses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <soap:operation soapAction="http://tempuri.org/GetAllNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceSoap12" type="tns:SHUWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <soap12:operation soapAction="http://tempuri.org/GetAllCoursesAuthenticated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllCoursesAuthenticatedAuthenticationHeader" part="AuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <soap12:operation soapAction="http://tempuri.org/GetAllCourses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <soap12:operation soapAction="http://tempuri.org/GetAllNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceHttpGet" type="tns:SHUWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <http:operation location="/GetAllCoursesAuthenticated" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <http:operation location="/GetAllCourses" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <http:operation location="/GetAllNames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceHttpPost" type="tns:SHUWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetAllCoursesAuthenticated">
+      <http:operation location="/GetAllCoursesAuthenticated" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCourses">
+      <http:operation location="/GetAllCourses" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNames">
+      <http:operation location="/GetAllNames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SHUWebService">
+    <wsdl:port name="SHUWebServiceSoap" binding="tns:SHUWebServiceSoap">
+      <soap:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceSoap12" binding="tns:SHUWebServiceSoap12">
+      <soap12:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceHttpGet" binding="tns:SHUWebServiceHttpGet">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceHttpPost" binding="tns:SHUWebServiceHttpPost">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsds/SHUWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

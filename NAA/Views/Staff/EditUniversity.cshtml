@@ -1,0 +1,40 @@
+﻿@using System.Web.Mvc.Html
+
+
+@model NAA.Data.University
+@{
+ViewBag.Title = "University";
+// Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditUniversity"))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <h4>University</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.UniversityId)
+
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.UniversityName, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-3 ">
+                @Html.TextBoxFor(x => x.UniversityName, new { @class = "form-control"})
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" value="Save" class="btn btn-primary" />
+
+                <input type="button" value="Cancel" onclick="window.location.href = '@Url.Action("Index", "Staff")'" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,65 @@
+﻿@using NAA.Helpers
+@model NAA.Data.Applicant
+
+<div>
+    <h4>Applicant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicantName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicantName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicantAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicantAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @if (User.IsInRole(Constants.Roles.Admin))
+    {
+        @Html.ActionLink("Back to List", "Index", "ApplicantAdmin")
+    }
+
+    @if (User.IsInRole(Constants.Roles.Applicant))
+    {
+        @Html.ActionLink("Edit", "EditApplicant", new {controller = "ApplicantAdmin", id = Model.ApplicantId}) 
+        @Html.ActionLink("Add Applicant", "AddApplicant", new {controller = "ApplicantAdmin", id = Model.ApplicantId}) 
+        @Html.ActionLink("Applications List", "Index", new {Controller = "Application", applicantId = Model.ApplicantId}, new {applicationId = Model.ApplicantId})
+    }
+
+
+</p>
