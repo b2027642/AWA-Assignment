@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NAA.Data;
 using NAA.Helpers;
+using NAA.Models;
 using NAA.Services.IServices;
 using NAA.Services.Service;
 
@@ -38,20 +39,46 @@ namespace NAA.Controllers
             {
                 model =
                     _universityService.GetUniversity(universityId.Value);
+                model.UniversityName = model.UniversityName.Trim();
             }
             else
             {
                 model=new University();
             }
 
-            return View(model);
+            return View(new UniversityViewModel
+            {
+                UniversityId = model.UniversityId,
+                UniversityName = model.UniversityName
+            });
         }
 
+        [HttpPost]
         public ActionResult EditUniversity(University model)
         {
-            _universityService.EditUniversity(model);
+            try
+            {
+                //do not allow to edit basic universities
 
-            return View(model);
+                if (model.UniversityId == 1 || model.UniversityId == 2)
+                {
+                    throw new ApplicationException("Can not edit The University of Sheffield and Sheffield Hallam University.");
+                }
+
+                _universityService.SaveUniversity(model);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(new UniversityViewModel
+                {
+                    UniversityId = model.UniversityId,
+                    UniversityName = model.UniversityName.Trim(),
+                    Error = ex.Message
+                });
+            }
+            
         }
 
         // GET: Staff

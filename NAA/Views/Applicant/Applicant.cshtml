@@ -37,18 +37,18 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.UserID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UserID)
+            </dd>*@
 
     </dl>
 </div>
 <p>
-    
+
     @if (User.IsInRole(Constants.Roles.Admin))
     {
         @Html.ActionLink("Back to List", "Index", "ApplicantAdmin")
@@ -56,9 +56,12 @@
 
     @if (User.IsInRole(Constants.Roles.Applicant))
     {
-        @Html.ActionLink("Edit", "EditApplicant", new {controller = "ApplicantAdmin", id = Model.ApplicantId}) 
-        @Html.ActionLink("Add Applicant", "AddApplicant", new {controller = "ApplicantAdmin", id = Model.ApplicantId}) 
-        @Html.ActionLink("Applications List", "Index", new {Controller = "Application", applicantId = Model.ApplicantId}, new {applicationId = Model.ApplicantId})
+        <div class="col-lg-2">
+            @Html.ActionLink("Edit", "EditApplicant", new { controller = "ApplicantAdmin", id = Model.ApplicantId })
+        </div>
+        <div class="col-lg-2">
+            @Html.ActionLink("Applications List", "Index", "Application")
+        </div>
     }
 
 

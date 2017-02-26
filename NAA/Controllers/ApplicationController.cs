@@ -49,7 +49,7 @@ namespace NAA.Controllers
         {
             var userId = HttpContext.User.Identity.GetUserId();
 
-            var applicant = _applicantService.GetApplicants().Where(x => x.UserID == userId).FirstOrDefault();
+            var applicant = _applicantService.GetApplicant(userId);
             var model = new ApplicationListViewModel();
 
             if (applicant != null)

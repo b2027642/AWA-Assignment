@@ -21,7 +21,9 @@ namespace NAA.Data.IDAO
         /// <param name="ApplicantId"></param>
         /// <returns></returns>
        Applicant GetApplicant(int ApplicantId);
-        
+
+        Applicant GetApplicant(string userId);
+
        // Edit applicant method
 
        void EditApplicant(Applicant applicant);

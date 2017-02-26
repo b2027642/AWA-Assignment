@@ -43,6 +43,15 @@ namespace NAA.Data.DAO
 
         }
 
+        public Applicant GetApplicant(string userId)
+        {
+            var applicants = from applicant
+                in _context.Applicant
+                             where applicant.UserID == userId
+                             select applicant;
+            return applicants.ToList<Applicant>().First();
+        }
+
         //Edit public method
 
         public void EditApplicant(Applicant applicant)

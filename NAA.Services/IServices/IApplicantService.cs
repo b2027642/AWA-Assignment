@@ -22,7 +22,14 @@ namespace NAA.Services.IServices
         /// <param name="ApplicantId"></param>
         /// <returns></returns>
         Applicant GetApplicant(int ApplicantId);
-        
+
+        /// <summary>
+        /// Return single applicant
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Applicant GetApplicant(string userId);
+
         //Edit method
         void EditApplicant(Applicant applicant);
 

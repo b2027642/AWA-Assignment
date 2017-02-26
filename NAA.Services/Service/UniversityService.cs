@@ -5,7 +5,7 @@ using NAA.Services.IServices;
 
 namespace NAA.Services.Service
 {
-    public class UniversityService: IUniversityService
+    public class UniversityService : IUniversityService
     {
         private Data.IDAO.IUniversityDAO _universityDAO;
 
@@ -20,7 +20,7 @@ namespace NAA.Services.Service
 
         public University GetUniversity(int universityId)
         {
-            var university= _universityDAO.GetUniversity(universityId);
+            var university = _universityDAO.GetUniversity(universityId);
 
             if (university != null)
             {
@@ -33,16 +33,28 @@ namespace NAA.Services.Service
         /// Get list of universities
         public IList<University> GetUniversities()
         {
-            return _universityDAO.GetUniversities().Select(s=> new University
+            return _universityDAO.GetUniversities().Select(s => new University
             {
                 UniversityName = s.UniversityName.Trim(),
                 UniversityId = s.UniversityId
             }).ToList();
         }
 
+        public void SaveUniversity(University university)
+        {
+            if (university.UniversityId > 0)
+            {
+                EditUniversity(university);
+            }
+            else
+            {
+                AddUniversity(university);
+            }
+        }
+
         public void EditUniversity(University university)
         {
-            _universityDAO.EditUniversity(university);
+              _universityDAO.EditUniversity(university);
         }
 
         public void AddUniversity(University university)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using NAA.Services.Service;
 using NAA.Services.IServices;
 
@@ -30,82 +31,12 @@ namespace NAA.Controllers
             return View(_applicantService.GetApplicants());
         }*/
 
-        public ActionResult Applicant(int id)
+        public ActionResult Applicant()
         {
-            return View(_applicantService.GetApplicant(id));
+            var userId = HttpContext.User.Identity.GetUserId();
+            var applicant = _applicantService.GetApplicant(userId);
+            return View(applicant);
 
-        }
-
-        // GET: Applicant/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Applicant/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Applicant/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Applicant/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Applicant/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Applicant/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Applicant/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

@@ -19,8 +19,11 @@ namespace NAA.Services.IServices
 
         //Edit method
         void EditUniversity(University university);
-
-        //Add applicant method
+        
+        //Edit
         void AddUniversity(University university);
+
+        //Edit or add
+       void SaveUniversity(University university);
     }
 }

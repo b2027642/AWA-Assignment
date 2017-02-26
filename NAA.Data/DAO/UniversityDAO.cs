@@ -33,8 +33,19 @@ namespace NAA.Data.DAO
           return universities.ToList().FirstOrDefault();
       }
 
-      /// Get list of universities
-      public IList<University> GetUniversities()
+        /// Get university for given university name
+        /// <param name="universityName"></param>
+        public University GetUniversity(string universityName)
+        {
+            var universities = from university
+                in _context.University
+                               where university.UniversityName == universityName
+                               select university;
+
+            return universities.ToList().FirstOrDefault();
+        }
+        /// Get list of universities
+        public IList<University> GetUniversities()
       {
             var universities = from university
                in _context.University select university;
@@ -46,10 +57,17 @@ namespace NAA.Data.DAO
 
         public void EditUniversity(University university)
         {
+            var uni = GetUniversity(university.UniversityName.Trim());
+
+            if (uni != null && uni.UniversityId != university.UniversityId)
+            {
+                throw new ApplicationException("University with same name already exist.");
+            }
+
             University dataUniversity = (from universities
               in _context.University
                                  where universities.UniversityId == university.UniversityId
-                                 select university).ToList<University>().First();
+                                 select universities).ToList().First();
            
             dataUniversity.UniversityName = university.UniversityName.Trim();
            
@@ -61,12 +79,19 @@ namespace NAA.Data.DAO
 
         public void AddUniversity(University university)
         {
+            var uni = GetUniversity(university.UniversityName.Trim());
+
+            if (uni != null)
+            {
+                throw new ApplicationException("University with same name already exist.");
+            }
+
             University dataUniversity = (from universities
              in _context.University
-                                         where universities.UniversityName.Trim() == university.UniversityName.Trim()
-                                         select university).ToList<University>().FirstOrDefault();
+                                         where universities.UniversityName == university.UniversityName
+                                         select universities).ToList<University>().FirstOrDefault();
 
-            if (dataUniversity != null)
+            if (dataUniversity == null)
             {
                 _context.University.Add(university);
                 _context.SaveChanges();

@@ -36,6 +36,11 @@ namespace NAA.Services.Service
             return _applicantDAO.GetApplicant(ApplicantId);
         }
 
+        public Applicant GetApplicant(string userId)
+        {
+            return _applicantDAO.GetApplicant(userId);
+        }
+
         //Edit method for applicant
         public void EditApplicant(Applicant applicant)
         {

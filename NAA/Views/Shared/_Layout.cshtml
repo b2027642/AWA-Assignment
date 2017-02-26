@@ -38,6 +38,7 @@
                     else if (User.IsInRole(Constants.Roles.Applicant))
                     {
                         <li>@Html.ActionLink("Applications", "Index", "Application")</li>
+                        <li>@Html.ActionLink("Profile", "Applicant", "Applicant")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

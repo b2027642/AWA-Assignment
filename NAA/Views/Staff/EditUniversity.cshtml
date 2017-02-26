@@ -1,10 +1,16 @@
 ﻿@using System.Web.Mvc.Html
 
-
-@model NAA.Data.University
+@model NAA.Models.UniversityViewModel
 @{
 ViewBag.Title = "University";
 // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-danger">
+        @Model.Error
+    </div>
 }
 
 @using (Html.BeginForm("EditUniversity"))
